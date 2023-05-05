@@ -33,3 +33,4 @@ sudo tee -a /etc/rc.local > /dev/null <<EOT
 iptables-restore < /etc/iptables.ipv4.nat
 exit 0
 EOT
+sudo systemctl restart networking

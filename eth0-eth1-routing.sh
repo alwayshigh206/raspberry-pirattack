@@ -6,6 +6,11 @@ GW_ETH0=$(ip -4 route show default | awk '/dev eth0/ {print $3}')
 
 # Get current IP address for eth1
 IPADDR_ETH1=$(ip -4 addr show eth1 | grep -oP '(?<=inet\s)\d+(\.\d+){3}')
+if [[ -n "$IPADDR_ETH1" ]]; then
+    sudo ip route add $IPADDR_ETH1/24 dev eth1
+else
+    echo "Could not find valid IP address for eth1"
+fi
 
 # Check if eth1 is up, bring it up if necessary
 ETH1_STATUS=$(cat /sys/class/net/eth1/operstate)

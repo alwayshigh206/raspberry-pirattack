@@ -1,5 +1,7 @@
 #!/bin/bash
-
+# This script take eth0 from DHCP and make eth1
+# subnet 192.168.32.1/24
+# If you need change subnet - just change it below ;)
 # Setting IP addresses for eth0 and eth1
 sudo dhclient eth0
 sudo tee /etc/network/interfaces > /dev/null <<EOT

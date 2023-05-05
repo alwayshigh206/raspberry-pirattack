@@ -25,6 +25,7 @@ sudo sh -c "iptables-save > /etc/iptables.ipv4.nat"
 
 # Setting up autoloading of saved iptables settings
 sudo sed -i '/exit 0/d' /etc/rc.local
+sudo touch /etc/rc.local
 sudo tee -a /etc/rc.local > /dev/null <<EOT
 iptables-restore < /etc/iptables.ipv4.nat
 exit 0

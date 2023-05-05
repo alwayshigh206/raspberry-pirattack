@@ -26,7 +26,7 @@ if [ -f /etc/iptables.ipv4.nat ]; then
 fi
 sudo sh -c "iptables-save > /etc/iptables.ipv4.nat"
 
-# Настройка автозагрузки сохраненных настроек iptables
+# Setting up autoloading of saved iptables settings
 sudo touch /etc/rc.local
 sudo sed -i '/exit 0/d' /etc/rc.local
 sudo tee -a /etc/rc.local > /dev/null <<EOT

@@ -15,7 +15,15 @@ netmask 255.255.255.0
 EOT
 
 # Enabling routing
-sudo sysctl -w net.ipv4.ip_forward=1
+routing_enabled=$(sysctl -n net.ipv4.ip_forward)
+
+if [[ $routing_enabled -eq 1 ]]; then
+    echo "Маршрутизация уже включена. Пропускаем команду."
+else
+    # Включаем маршрутизацию
+    sudo sysctl -w net.ipv4.ip_forward=1
+    echo "Маршрутизация включена."
+fi
 
 # Configuring NAT
 sudo iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
@@ -68,3 +76,4 @@ sudo ip route replace default via $GW_ETH0 dev eth0
 # Set route for eth1 network
 sudo ip route add $IPADDR_ETH1/24 dev eth1
 #sudo systemctl restart networking
+sudo restart dnsmasq

@@ -1,9 +1,0 @@
-[Unit]
-Description=Responder Service
-After=network.target
-
-[Service]
-ExecStart=python3 /usr/share/responder/Responder.py -I eth0 -w On -v -F
-
-[Install]
-WantedBy=default.target
